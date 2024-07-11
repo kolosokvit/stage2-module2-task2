@@ -10,10 +10,14 @@ import java.io.IOException;
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
     @Override
-    protected void service(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) {
         HttpSession session = req.getSession();
-        session.setAttribute("user", null);
+        session.removeAttribute("user");
         session.invalidate();
-        resp.sendRedirect("/login.jsp");
+        try {
+            resp.sendRedirect("/login.jsp");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
