@@ -33,7 +33,7 @@ public class LoginServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
         String user = (String) req.getAttribute("login");
         String password = (String) req.getAttribute("password");
-        if (Users.getInstance().getUsers().contains(user) && password.isEmpty()) {
+        if (Users.getInstance().getUsers().contains(user) && password != null && !password.isEmpty()) {
             req.getSession().setAttribute("user", user);
             try {
                 resp.sendRedirect(LOGIN_PAGE);
