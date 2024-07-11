@@ -31,8 +31,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        String user = (String) req.getAttribute("login");
-        String password = (String) req.getAttribute("password");
+        String user = req.getParameter("login");
+        String password = req.getParameter("password");
         if (Users.getInstance().getUsers().contains(user) && password != null && !password.isEmpty()) {
             req.getSession().setAttribute("user", user);
             try {
