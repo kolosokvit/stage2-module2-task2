@@ -16,13 +16,13 @@ public class LoginServlet extends HttpServlet {
         String user = (String) req.getSession().getAttribute("user");
         if (user != null) {
             try {
-                resp.sendRedirect(LOGIN_PAGE);
+                resp.sendRedirect("/user/hello.jsp");
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else {
             try {
-                resp.sendRedirect("/user/hello.jsp");
+                resp.sendRedirect(LOGIN_PAGE);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -31,10 +31,10 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
-        String login = (String) req.getAttribute("login");
+        String user = (String) req.getAttribute("login");
         String password = (String) req.getAttribute("password");
-        if (Users.getInstance().getUsers().contains(login) && password.isEmpty()) {
-            req.getSession().setAttribute("user", login);
+        if (Users.getInstance().getUsers().contains(user) && password.isEmpty()) {
+            req.getSession().setAttribute("user", user);
             try {
                 resp.sendRedirect(LOGIN_PAGE);
             } catch (IOException e) {
